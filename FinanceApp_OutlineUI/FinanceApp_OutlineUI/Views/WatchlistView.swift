@@ -22,6 +22,9 @@ struct WatchlistView: View {
                     StockCard()
                     StockCard()
                     StockCard()
+                    StockCard()
+                    StockCard()
+                    
                 }
                 
             }

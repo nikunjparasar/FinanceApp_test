@@ -59,7 +59,7 @@ struct PortfolioCard: View {
             }
         }
         .padding()
-        .frame(height: UIScreen.main.bounds.height / 4)
+        .frame(height: UIScreen.main.bounds.height / 5)
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 30)

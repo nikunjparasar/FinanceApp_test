@@ -18,13 +18,19 @@ struct StockCard: View {
                     .font(.system(size: 50))
                 
                 VStack {
-                    Text("AAPL")
-                        .bold()
-                        .font(.title3)
-                    Text("Apple Inc")
-                        .foregroundColor(.gray)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
+                    HStack {
+                        Text("AAPL")
+                            .bold()
+                            .font(.title3)
+                        Spacer()
+                    }
+                    HStack {
+                        Text("Apple Inc")
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            Spacer()
+                    }
                 }
                 Spacer()
                 
@@ -41,13 +47,15 @@ struct StockCard: View {
                     .font(.title)
                 Spacer()
                 //Graph
-                Text("Graph")
+                LineChart(data: StockMockData.apple.normalizedValues)
+                    .stroke(Color.lightGreen, lineWidth: 1.5)
+                
             }
         }
         .padding()
         .padding(.horizontal)
         .padding(5)
-        .frame(height: UIScreen.main.bounds.height/4)
+        .frame(height: UIScreen.main.bounds.height/6)
         .background(
             RoundedRectangle(cornerRadius: 30)
                 .stroke(Color.gray)
