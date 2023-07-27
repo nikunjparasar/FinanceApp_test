@@ -23,10 +23,12 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
-        .edgesIgnoringSafeArea(.bottom)
+//        .edgesIgnoringSafeArea(.bottom)
         .sheet(isPresented: $isShowingStockSearchSheet){
             SearchStockView()
-        }.background(Color.white)
+        }
+        .background(Color.black)
+        
     }
 
 }

@@ -16,12 +16,13 @@ struct StockCard: View {
 //                            .resizable()
 //                            .aspectRatio(contentMode: .fit)
                     .font(.system(size: 50))
-                
+                    .foregroundColor(Color.white)
                 VStack {
                     HStack {
                         Text("AAPL")
                             .bold()
                             .font(.title3)
+                            .foregroundColor(Color.white)
                         Spacer()
                     }
                     HStack {
@@ -35,7 +36,10 @@ struct StockCard: View {
                 Spacer()
                 
                 Text("1.2%")
-                    .foregroundColor(Color.lightGreen)
+//                positive
+                    .foregroundColor(Color.lightBlue)
+//                negative
+//                    .foregroundColor(Color.weirdPink)
                     .bold()
                     .font(.title3)
                 
@@ -45,21 +49,25 @@ struct StockCard: View {
                 Text("$137.51")
                     .bold()
                     .font(.title)
+                    .foregroundColor(Color.white)
                 Spacer()
                 //Graph
                 LineChart(data: StockMockData.apple.normalizedValues)
-                    .stroke(Color.lightGreen, lineWidth: 1.5)
-                
+                    .stroke(
+//                         for negative percent change
+//                        LinearGradient(gradient: Gradient(colors: [.purple, .weirdPink, .weirdPink]), startPoint: .bottomLeading, endPoint: .topTrailing), lineWidth: 1.5)
+                        // for positive percent change
+                        LinearGradient(gradient: Gradient(colors: [.purple, .lightBlue, .lightBlue]), startPoint: .bottomLeading, endPoint: .topTrailing), lineWidth: 1.5)
             }
         }
         .padding()
         .padding(.horizontal)
         .padding(5)
         .frame(height: UIScreen.main.bounds.height/6)
-        .background(
-            RoundedRectangle(cornerRadius: 30)
-                .stroke(Color.gray)
-        )
+//        .background(
+//            RoundedRectangle(cornerRadius: 15)
+//                .stroke(Color.gray)
+//        )
     }
 }
 

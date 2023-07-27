@@ -10,7 +10,7 @@ import SwiftUI
 struct PortfolioCard: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Porfolio Value")
+            Text("Portfolio Value")
                 .foregroundColor(Color.gray)
                 .font(.title2)
             HStack(alignment: .top){
@@ -18,8 +18,8 @@ struct PortfolioCard: View {
                     .bold()
                     .foregroundColor(Color.white)
                     .font(.largeTitle)
-                Text("2.1%")
-                    .foregroundColor(Color.lightGreen)
+                Text("-2.1%")
+                    .foregroundColor(Color.weirdPink)
                     .bold()
                     .font(.title3)
             }
@@ -30,23 +30,7 @@ struct PortfolioCard: View {
                 Button (action: {
                     
                 }) {
-                   Text("Deposit")
-                        .foregroundColor(Color.white)
-                        .bold()
-                        .padding()
-                        .padding(.horizontal)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.lightGreen)
-                        )
-                }
-                
-                Spacer()
-                
-                Button (action: {
-                    
-                }) {
-                   Text("Withdraw")
+                   Text("Edit")
                         .foregroundColor(Color.white)
                         .bold()
                         .padding()
@@ -56,14 +40,32 @@ struct PortfolioCard: View {
                                 .stroke(Color.gray)
                         )
                 }
+                
+                Spacer()
+                
+                Button (action: {
+                    
+                }) {
+                   Text("AI Report")
+                        .foregroundStyle(LinearGradient(colors: [.brightPink, .gray], startPoint: .leading, endPoint: .trailing))
+//                        .bold()
+                        .padding()
+                        .padding(.horizontal)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(LinearGradient(colors: [.brightPink, .darkGray], startPoint: .bottomLeading, endPoint: .topTrailing))
+                        )
+                }
             }
         }
         .padding()
-        .frame(height: UIScreen.main.bounds.height / 5)
+        .frame(height: UIScreen.main.bounds.height / 5.5)
         .frame(maxWidth: .infinity)
         .background(
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color.darkBlue)
+            RoundedRectangle(cornerRadius: 20)
+                .fill(
+                    LinearGradient(colors: [.darkGray, .darkGray, .lowOp, .darkGray], startPoint: .bottomLeading, endPoint: .topTrailing)
+                )
         )
     }
 }

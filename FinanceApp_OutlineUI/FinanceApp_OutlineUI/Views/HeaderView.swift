@@ -11,17 +11,17 @@ struct HeaderView: View {
     @Binding var showSheet: Bool
     var body: some View {
         HStack{
-            Text("My Stocks")
+            Text("Trackers")
                 .font(.largeTitle)
                 .bold()
-                .foregroundColor(Color.darkBlue)
+                .foregroundColor(Color.gray)
             Spacer()
             
             Button(action: {
                 showSheet.toggle()
             }) {
                 Image(systemName: "magnifyingglass.circle.fill")
-                    .accentColor(Color.darkBlue)
+                    .accentColor(Color.gray)
                     .font(.system(size: 40))
             }
         }

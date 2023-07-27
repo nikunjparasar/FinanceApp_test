@@ -14,8 +14,22 @@ extension Color {
     public static var darkBlue: Color {
         return Color(uiColor: UIColor(red: 3/255, green: 49/255, blue: 75/255, alpha: 1.0))
     }
-    public static var lightGreen: Color {
-        return Color(uiColor: UIColor(red: 30/255, green: 204/255, blue: 151/255, alpha: 1.0))
+    public static var lightBlue: Color {
+        return Color(uiColor: UIColor(red: 75/255, green: 229/255, blue: 235/255, alpha: 1.0))
+    }
+    
+    public static var weirdPink: Color {
+        return Color(uiColor: UIColor(red: 240/255, green: 46/255, blue: 117/255, alpha: 1.0))
+    }
+    
+    public static var darkGray: Color {
+        return Color(uiColor: UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 0.7))
+    }
+    public static var lowOp: Color {
+        return Color(uiColor: UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 0.1))
+    }
+    public static var brightPink: Color {
+        return Color(uiColor: UIColor(red: 250/255, green: 0/255, blue: 255/255, alpha: 1.0))
     }
 }
 

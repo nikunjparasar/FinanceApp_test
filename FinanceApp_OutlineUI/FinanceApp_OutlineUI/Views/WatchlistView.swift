@@ -14,7 +14,7 @@ struct WatchlistView: View {
                 Text("Watchlist")
                     .font(.title)
                     .bold()
-                    .foregroundColor(Color.darkBlue)
+                    .foregroundColor(Color.gray)
                     Spacer()
             }
             ScrollView{
@@ -24,12 +24,17 @@ struct WatchlistView: View {
                     StockCard()
                     StockCard()
                     StockCard()
-                    
                 }
+                
                 
             }
             .padding(3)
-            
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(
+                        LinearGradient(colors: [.darkGray, .darkGray, .lowOp, .darkGray], startPoint: .bottomLeading, endPoint: .topTrailing)
+                    )
+            )
             
             
         }

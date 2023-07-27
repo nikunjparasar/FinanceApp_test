@@ -40,7 +40,7 @@ struct LineChart: Shape {
 struct LineChart_Previews: PreviewProvider {
     static var previews: some View {
         LineChart(data: StockMockData.apple.normalizedValues)
-            .stroke(Color.lightGreen)
+            .stroke(Color.lightBlue)
             .frame(width: 400, height: 500)
             .padding()
     }
