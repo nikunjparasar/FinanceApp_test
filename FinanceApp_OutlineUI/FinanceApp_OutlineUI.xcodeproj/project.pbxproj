@@ -61,6 +61,7 @@
 		C33DFA9D2A6B33DE00F183B5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C36F71742A733902006FA0AC /* StockModel.swift */,
 				C33DFA9E2A6B33FA00F183B5 /* Extensions.swift */,
 				C36F716F2A732B79006FA0AC /* JSONDecoders.swift */,
 			);
@@ -79,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				C36F71722A7338BD006FA0AC /* StocksViewModel.swift */,
-				C36F71742A733902006FA0AC /* StockModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

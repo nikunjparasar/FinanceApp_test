@@ -8,18 +8,27 @@
 import SwiftUI
 
 struct PortfolioCard: View {
+    
+    @StateObject var stocksVM: StocksViewModel
+
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Portfolio Value")
                 .foregroundColor(Color.gray)
                 .font(.title2)
             HStack(alignment: .top){
-                Text("$4,100,233.30")
+                Text("\(String(format: "%.2f", stocksVM.stocks.map({$0.currentPrice ?? 0.0}).reduce(0.0, +)))")
                     .bold()
                     .foregroundColor(Color.white)
                     .font(.largeTitle)
-                Text("-2.1%")
-                    .foregroundColor(Color.weirdPink)
+                
+                Text(
+                    "\((stocksVM.calc) >= 0.0 ? "+" : "")"
+                     +
+                    "\(String(format: "%.2f", stocksVM.calc))%"
+                )
+                .foregroundColor((stocksVM.calc) >= 0.0 ? Color.lightBlue : Color.weirdPink)
                     .bold()
                     .font(.title3)
             }
@@ -69,9 +78,9 @@ struct PortfolioCard: View {
         )
     }
 }
-
-struct PortfolioCard_Previews: PreviewProvider {
-    static var previews: some View {
-        PortfolioCard()
-    }
-}
+//
+//struct PortfolioCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PortfolioCard()
+//    }
+//}

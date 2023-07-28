@@ -8,25 +8,31 @@
 import SwiftUI
 
 struct StockCard: View {
+    
+    let stockModel: StockModel
+    @State private var logoStr: String = ""
+
     var body: some View {
         VStack {
             HStack {
-//                        AsyncImage(url: URL(string: "https://logo.clearbit.com/apple.com"))
-                Image(systemName: "appletv.fill")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-                    .font(.system(size: 50))
-                    .foregroundColor(Color.white)
+                AsyncImage(url: URL(string: "https://logo.clearbit.com/\(logoStr).com")) { image in
+                    image.resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40)
+                } placeholder: {
+                    ProgressView()
+                }
+                .cornerRadius(5)
+                
+                    
                 VStack {
                     HStack {
-                        Text("AAPL")
+                        Text(stockModel.symbol)
                             .bold()
                             .font(.title3)
                             .foregroundColor(Color.white)
                         Spacer()
                     }
                     HStack {
-                        Text("Apple Inc")
+                        Text(stockModel.description ?? "")
                             .foregroundColor(.gray)
                             .lineLimit(1)
                             .truncationMode(.tail)
@@ -35,29 +41,28 @@ struct StockCard: View {
                 }
                 Spacer()
                 
-                Text("1.2%")
-//                positive
-                    .foregroundColor(Color.lightBlue)
-//                negative
-//                    .foregroundColor(Color.weirdPink)
+                Text(
+                    
+                    "\((stockModel.percentageChange ?? 0.0) >= 0.0 ? "+" : "")"
+                     +
+                    "\(String(format: "%.2f", stockModel.percentageChange ?? 0.00))%"
+                
+                )
+                    .foregroundColor((stockModel.percentageChange ?? 0.0) >= 0.0 ? Color.lightBlue : Color.weirdPink)
                     .bold()
                     .font(.title3)
                 
             }
             Spacer()
             HStack {
-                Text("$137.51")
+                Text("$\(String(format: "%.2f", stockModel.currentPrice ?? 0.0))")
                     .bold()
                     .font(.title)
                     .foregroundColor(Color.white)
                 Spacer()
                 //Graph
-                LineChart(data: StockMockData.apple.normalizedValues)
-                    .stroke(
-//                         for negative percent change
-//                        LinearGradient(gradient: Gradient(colors: [.purple, .weirdPink, .weirdPink]), startPoint: .bottomLeading, endPoint: .topTrailing), lineWidth: 1.5)
-                        // for positive percent change
-                        LinearGradient(gradient: Gradient(colors: [.purple, .lightBlue, .lightBlue]), startPoint: .bottomLeading, endPoint: .topTrailing), lineWidth: 1.5)
+                LineChart(data: stockModel.candles.normalizedValues)
+                    .stroke( (stockModel.percentageChange ?? 0.0) >= 0.0 ? LinearGradient(gradient: Gradient(colors: [.purple, .lightBlue, .lightBlue]), startPoint: .bottomLeading, endPoint: .topTrailing) : LinearGradient(gradient: Gradient(colors: [.purple, .weirdPink, .weirdPink]), startPoint: .bottomLeading, endPoint: .topTrailing), lineWidth: 1.5)
             }
         }
         .padding()
@@ -68,11 +73,16 @@ struct StockCard: View {
 //            RoundedRectangle(cornerRadius: 15)
 //                .stroke(Color.gray)
 //        )
+        .onAppear {
+            if let logoStr = stockModel.description?.components(separatedBy: " ").first {
+                self.logoStr = logoStr.lowercased()
+            }
+        }
     }
 }
-
-struct StockCard_Previews: PreviewProvider {
-    static var previews: some View {
-        StockCard()
-    }
-}
+//
+//struct StockCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StockCard()
+//    }
+//}

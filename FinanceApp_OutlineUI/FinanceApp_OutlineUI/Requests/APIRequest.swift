@@ -22,12 +22,12 @@ class APIRequest {
                 if let error = error {
                     // we have an error here
                     
-                    print("Error getting quote: \(error)")
+                    print("error getting quote: \(error)")
                     return
                 }
                 
                 guard let quoteData = data else {
-                    // APPL -> APPLEE
+                    // AAPL -> APPLEEEEE
                     print("symbol search data not valid")
                     return
                 }
@@ -39,11 +39,10 @@ class APIRequest {
             task.resume()
         }
     }
-    
-    
-    public func getSymbolLookup(searchQuery: String, handler: @escaping(_ returnedSymbols: StockSymbolSearch?) -> ()){
+        
+    public func getSymbolLookup(searchQuery: String, handler: @escaping(_ returnedLookup: StockSymbolSearch?) -> ()) {
         let query: String = "search?q=\(searchQuery)"
-    
+        
         let url = URL(string: url + query + token)
         
         if let url = url {
@@ -53,9 +52,10 @@ class APIRequest {
                     return
                 } else {
                     guard let searchData = data else {
-                        print("symbol seaerch not valid")
+                        print("symbol search not valid")
                         return
                     }
+                    
                     let returnedSymbols = try? JSONDecoder().decode(StockSymbolSearch.self, from: searchData)
                     handler(returnedSymbols)
                 }
@@ -63,13 +63,14 @@ class APIRequest {
             task.resume()
         }
     }
-    
-    public func getCandles(symbol: String, hourLength: Int, handler: @escaping(_ returnedCandles: Candles?) -> ()) {
-        //dates
-        let endDate = Int(Date().timeIntervalSince1970)
-        let startDate = Int(Calendar.current.date(byAdding: .day, value: -(hourLength), to: Date())?.timeIntervalSince1970 ?? Date().timeIntervalSince1970)
         
-        let query = "stock/candle?symbol=\(symbol)&resolution=5&from=\(startDate)&to=\(endDate)"
+    public func getCandles(symbol: String, hourLength: Int, handler: @escaping(_ returnedCandles: Candles?) -> ()) {
+        // dates
+        let endDate = Int(Date().timeIntervalSince1970)
+        //
+        let startDate = Int((Calendar.current.date(byAdding: .hour, value: -(hourLength), to: Date())?.timeIntervalSince1970 ?? Date().timeIntervalSince1970))
+        
+       let query = "stock/candle?symbol=\(symbol)&resolution=5&from=\(startDate)&to=\(endDate)"
         
         let url = URL(string: url + query + token)
         
@@ -83,11 +84,13 @@ class APIRequest {
                         print("candle data not valid")
                         return
                     }
+                    
                     let returnedCandles = try? JSONDecoder().decode(Candles.self, from: searchData)
                     handler(returnedCandles)
                 }
             }
             task.resume()
         }
+        
     }
 }
